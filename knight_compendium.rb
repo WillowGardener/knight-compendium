@@ -62,7 +62,7 @@ end
 
 def list_knights
   puts "Here are your Knights of the Round Table:"
-  knights = Knight.all
+  knights = Knight.where({:dead => false})
   knights.each { |knight| puts knight.name }
 end
 
@@ -119,6 +119,14 @@ def assign_color
   color = Favorite_Color.find_by(name: color_input)
   knight.update(:favorite_color => color.name)
   puts "\n\n#{knight.name} is now assigned to #{color.name}.\n\n"
+end
+
+def mark_dead
+  puts "Who has died?!"
+  list_knights
+  knight_input = gets.chomp
+  knight = Knight.where({:name => knight_input}).first
+  knight.update({:dead => true})
 end
 
 welcome

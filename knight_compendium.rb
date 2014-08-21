@@ -15,14 +15,35 @@ end
 def menu
   choice = nil
   until choice == 'x'
-    puts "Press 'a' to add a knight, 'k' to list your knights, or 'd' to mark a knight dead"
-    puts "press 'x' to exit"
+    puts "Press 'k1' to add a knight, 'k2' to list your knights, or 'ko' to mark a knight dead"
+    puts "Press 'c1' to add a favorite color, 'c2' to list favorite colors, or 'c3' to assign a knight to a favorite color."
+    puts "Press 'q1' to add a quest, 'q2' to list all quests, or 'q3' to assign a quest to a knight."
+    puts "press 'x' to exit\n\n"
     choice = gets.chomp
     case choice
-    when 'a'
-      add_knights
-    when 'k'
+    when 'k1'
+      add_knight
+    when 'k2'
       list_knights
+    when 'ko'
+      mark_dead
+    when 'c1'
+      add_color
+    when 'c2'
+      list_colors
+    when 'c3'
+      assign_color
+    when 'c4'
+      puts "KABOOM"
+      sleep(1.5)
+      system 'clear'
+      welcome
+    when 'q1'
+      add_quest
+    when 'q2'
+      list_quests
+    when 'q3'
+      assign_quest
     when 'x'
       puts 'til the morrow'
     else
@@ -59,32 +80,34 @@ def list_quests
   quests.each { |quest| puts quest.name }
 end
 
-def add_favorite_color
+def add_color
   puts "What. Is your faaaaaaavorite color?"
-  favorite_color_name = gets.chomp
-  favorite_color = Favorite_Color.new(:name => favorite_color_name)
-  favorite_color.save
+  color_name = gets.chomp
+  color = Favorite_Color.new(:name => color_name)
+  color.save
   object_number = rand(5) + 1
   if object_number == 1
     @object = "river"
-  if object_number == 2
+  elsif object_number == 2
     @object = "cross"
-  if object_number == 3
+  elsif object_number == 3
     @object = "sword"
-  if object_number == 4
+  elsif object_number == 4
     @object = "mountain"
-  if object_number == 5
+  elsif object_number == 5
     @object = "dragon"
-  if object_number == 6
+  elsif object_number == 6
     @object = "chicken"
   end
-  puts "The Knights of the '#{favorite_color}'' '#{@object}'"
+  puts "The Knights of the #{color.name} #{@object}"
 end
 
-def list_favorite_colors
+def list_colors
   puts "The Knights of the Round Table have many faaaaaavorite colors:"
   colors = Favorite_color.all
   colors.each { |color| puts color.name}
 end
+
+
 
 welcome

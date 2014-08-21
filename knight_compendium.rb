@@ -20,9 +20,9 @@ def menu
     choice = gets.chomp
     case choice
     when 'a'
-      add
+      add_knights
     when 'k'
-      list
+      list_knights
     when 'x'
       puts 'til the morrow'
     else
@@ -31,7 +31,7 @@ def menu
   end
 end
 
-def add
+def add_knight
   puts "Which brave noble shall be add to the Round Table?"
   knight_name = gets.chomp
   knight = Knight.new({:name => knight_name, :dead => false})
@@ -39,10 +39,12 @@ def add
   puts "'#{knight_name}' has been added to the Round Table."
 end
 
-def list
+def list_knights
   puts "Here are your Knights of the Round Table:"
   knights = Knight.all
   knights.each { |knight| puts knight.name }
 end
+
+
 
 welcome

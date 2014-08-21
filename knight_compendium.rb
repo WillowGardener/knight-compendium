@@ -8,6 +8,7 @@ development_configuration = database_configurations['development']
 ActiveRecord::Base.establish_connection(development_configuration)
 
 def welcome
+  system 'clear'
   puts "*** Welcome to the Knight Tracker ***"
   menu
 end
@@ -64,6 +65,7 @@ def list_knights
   puts "Here are your Knights of the Round Table:"
   knights = Knight.where({:dead => false})
   knights.each { |knight| puts knight.name }
+  puts "\n"
 end
 
 def add_quest
@@ -78,6 +80,7 @@ def list_quests
   puts "Noble deeds to do:"
   quests = Quest.all
   quests.each { |quest| puts quest.name }
+  puts "\n"
 end
 
 def add_color
@@ -127,6 +130,19 @@ def mark_dead
   knight_input = gets.chomp
   knight = Knight.where({:name => knight_input}).first
   knight.update({:dead => true})
+end
+
+def assign_quest
+  puts "Who. Has a quest?!"
+  list_knights
+  knight_input = gets.chomp
+  knight = Knight.find_by(name: knight_input)
+  puts "What. is #{knight.name}'s quest?"
+  list_quests
+  quest_input = gets.chomp
+  quest = Quest.find_by(name: quest_input)
+  quest.update(:knight => knight.name)
+  puts "\n\n#{quest.name} is now assigned to #{knight.name}.\n\n"
 end
 
 welcome

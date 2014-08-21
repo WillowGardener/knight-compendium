@@ -104,10 +104,21 @@ end
 
 def list_colors
   puts "The Knights of the Round Table have many faaaaaavorite colors:"
-  colors = Favorite_color.all
+  colors = Favorite_Color.all
   colors.each { |color| puts color.name}
 end
 
-
+def assign_color
+  puts "Who. Has a faaaaaaavorite color?"
+  list_knights
+  knight_input = gets.chomp
+  knight = Knight.find_by(name: knight_input)
+  puts "What. Is #{knight.name}'s faaaaaaaaaaaaaaaaaaaaaaaaaaaaaavorite color?"
+  list_colors
+  color_input = gets.chomp
+  color = Favorite_Color.find_by(name: color_input)
+  knight.update(:favorite_color => color.name)
+  puts "\n\n#{knight.name} is now assigned to #{color.name}.\n\n"
+end
 
 welcome

@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: knight_tracker_develpment
+
+test:
+  adapter: postgresql
+  database: knight_tracker_test

@@ -59,4 +59,32 @@ def list_quests
   quests.each { |quest| puts quest.name }
 end
 
+def add_favorite_color
+  puts "What. Is your faaaaaaavorite color?"
+  favorite_color_name = gets.chomp
+  favorite_color = Favorite_Color.new(:name => favorite_color_name)
+  favorite_color.save
+  object_number = rand(5) + 1
+  if object_number == 1
+    @object = "river"
+  if object_number == 2
+    @object = "cross"
+  if object_number == 3
+    @object = "sword"
+  if object_number == 4
+    @object = "mountain"
+  if object_number == 5
+    @object = "dragon"
+  if object_number == 6
+    @object = "chicken"
+  end
+  puts "The Knights of the '#{favorite_color}'' '#{@object}'"
+end
+
+def list_favorite_colors
+  puts "The Knights of the Round Table have many faaaaaavorite colors:"
+  colors = Favorite_color.all
+  colors.each { |color| puts color.name}
+end
+
 welcome

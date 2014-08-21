@@ -45,6 +45,18 @@ def list_knights
   knights.each { |knight| puts knight.name }
 end
 
+def add_quest
+  puts "What. Is your quest?"
+  quest_name = gets.chomp
+  quest = Quest.new({:name => quest_name, :done => false})
+  quest.save
+  puts "Now you must go '#{quest_name}'"
+end
 
+def list_quests
+  puts "Noble deeds to do:"
+  quests = Quest.all
+  quests.each { |quest| puts quest.name }
+end
 
 welcome
